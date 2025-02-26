@@ -1,6 +1,6 @@
 # K-LoRA
 
-Official implementation of [K-LoRA: Unlocking Training-Free Fusion of Any Subject and Style LoRAs]().
+Official implementation of [K-LoRA: Unlocking Training-Free Fusion of Any Subject and Style LoRAs](https://arxiv.org/pdf/2502.18461).
 
 ![teaser](pictures/teaser.svg)
 
