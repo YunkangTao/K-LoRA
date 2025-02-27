@@ -110,7 +110,9 @@ python inference_sd.py \
 
 #### 2.2 FLUX
 
-If you want to test the **FLUX** version of K-LoRA, you can directly run the `inference_flux.py` script to perform inference using the community LoRA. --> 
+If you want to test the **FLUX** version of K-LoRA, you can directly run the `inference_flux.py` script to perform inference using the community LoRA. 
+
+If you are using **FLUX** for testing, it is recommended to use a higher version of Flux. Please refer to [FLUX](https://github.com/black-forest-labs/flux) for the dependency details.
 
 If you wish to use the local **FLUX LoRA**, it is recommended to train it using the Dreambooth LoRA. For training instructions, you can refer to [dreambooth_lora](https://huggingface.co/docs/peft/main/en/task_guides/dreambooth_lora). 
 
