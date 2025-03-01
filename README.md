@@ -138,6 +138,13 @@ unet = insert_community_flux_lora_to_unet(
 
 ## Citation
 If you use this code, please cite the following paper:
+```BibTeX
+@inproceedings{ouyang2025k,
+  title={K-LoRA: Unlocking Training-Free Fusion of Any Subject and Style LoRAs},
+  author={Ouyang, Ziheng and Li, Zhen and Hou, Qibin},
+  booktitle={CVPR},
+  year={2025}
+}
 
 ## Contact
 If you have any questions or suggestions, please feel free to open an issue or contact the authors at [zihengouyang666@gmail.com](mailto:zihengouyang666@gmail.com).
