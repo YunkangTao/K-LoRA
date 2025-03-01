@@ -137,6 +137,7 @@ unet = insert_community_flux_lora_to_unet(
 ```
 
 ## Citation
+
 If you use this code, please cite the following paper:
 ```BibTeX
 @inproceedings{ouyang2025k,
@@ -145,6 +146,11 @@ If you use this code, please cite the following paper:
   booktitle={CVPR},
   year={2025}
 }
+```
 
 ## Contact
 If you have any questions or suggestions, please feel free to open an issue or contact the authors at [zihengouyang666@gmail.com](mailto:zihengouyang666@gmail.com).
+
+## License
+Licensed under a [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/) for Non-commercial use only.
+Any commercial use should get formal permission first.
