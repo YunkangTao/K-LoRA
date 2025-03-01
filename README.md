@@ -12,7 +12,7 @@ Below are the results of **K-LoRA**. The rows correspond to the respective style
 ![teaser](pictures/520.svg)
 
 ## 🎨 Scaling factor
-In the supplementary materials of our paper, we propose another scale s* . If you wish to generate recommendations with more style block information, we recommend choosing s*. If you prefer more texture details, s is the better option. You can select based on your preferences. (For Flux, we recommend using s*.) Below are reference images for different scales.
+In the supplementary materials of our paper, we propose another scale s* . If you wish to generate images with more style block information, we recommend choosing s*. If you prefer more texture details, s is the better option. You can select based on your preferences. (For Flux, we recommend using s*.) Below are reference images for different scales.
 
 ![scale](pictures/scale.svg)
 
