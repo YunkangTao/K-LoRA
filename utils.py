@@ -426,7 +426,7 @@ def insert_community_flux_lora_to_unet(
     diffuse_step,
     content_lora_weight_name: str = None,
     style_lora_weight_name: str = None,
-    patten: str = "s#",
+    patten: str = "s*",
 ):
     lora_weights_content = get_lora_weights(
         lora_name_or_path=lora_weights_content_path,
@@ -530,6 +530,7 @@ def insert_community_flux_lora_to_unet(
                 )
 
     elif content_layer_nums == 494:
+        sum_timesteps = 11592
         unet = unet.transformer
         # load single_transformer_blocks_lora
         for index, layer_name in enumerate(unet.single_transformer_blocks):
