@@ -530,7 +530,7 @@ def insert_community_flux_lora_to_unet(
                 )
 
     elif content_layer_nums == 494:
-        sum_timesteps = 11592
+        sum_timesteps = 11704
         unet = unet.transformer
         # load single_transformer_blocks_lora
         for index, layer_name in enumerate(unet.single_transformer_blocks):
