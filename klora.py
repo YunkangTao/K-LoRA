@@ -42,7 +42,7 @@ class KLoRALinearLayer(nn.Module):
     # select topk weights 
     def get_klora_weight(self, timestep):
         sum_timesteps = self.sum_timesteps
-        k = 64
+        k = self.weight_1_a.shape[1] * self.weight_2_a.shape[1]
         alpha = self.alpha
         beta = self.beta
         gamma = self.average_ratio
