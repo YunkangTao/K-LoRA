@@ -1,8 +1,11 @@
 **/__pycache__/
-output  
+output*/
 loras
 *.safetensors
 loraDataset
 visual.py
 test.py
 weights
+seekoo_lora/
+.vscode/
+FLUX.1-dev/

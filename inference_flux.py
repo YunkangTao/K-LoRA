@@ -72,7 +72,7 @@ def parse_args():
     parser.add_argument(
         "--pretrained_model_name_or_path",
         type=str,
-        default="/home/ubuntu/.cache/huggingface/hub/models--black-forest-labs--FLUX.1-dev/snapshots/0ef5fff789c832c5c7f4e127f94c8b54bbcced44/",
+        default="/mnt/nfs/file_server2/public/taoyunkang/K-LoRA/FLUX.1-dev/",
         help="Pretrained model path",
     )
     parser.add_argument(
@@ -118,9 +118,7 @@ style_trigger_word = style_triggers[int(args.style_index)]
 content_lora_weight_name = content_lora_weight_names[int(args.content_index)]
 style_lora_weight_name = style_lora_weight_names[int(args.style_index)]
 
-pipe = DiffusionPipeline.from_pretrained(
-    args.pretrained_model_name_or_path, torch_dtype=torch.bfloat16
-)
+pipe = DiffusionPipeline.from_pretrained(args.pretrained_model_name_or_path, torch_dtype=torch.bfloat16)
 unet = insert_community_flux_lora_to_unet(
     unet=pipe,
     lora_weights_content_path=content_lora,
@@ -138,12 +136,13 @@ pipe.to(device, dtype=torch.float16)
 
 
 def run():
-    seeds = list(range(40))
+    seeds = list(range(20))
 
     for index, seed in enumerate(seeds):
         generator = torch.Generator(device=device).manual_seed(seed)
         image = pipe(prompt=prompt, generator=generator).images[0]
         output_path = os.path.join(args.output_folder, f"output_image_{index}.png")
+        os.makedirs(args.output_folder, exist_ok=True)
         print(f"Saving output to {output_path}")
         image.save(output_path)
 

@@ -25,22 +25,18 @@ def get_lora_weights(
     if os.path.exists(lora_name_or_path):
         if subfolder is not None:
             lora_name_or_path = os.path.join(lora_name_or_path, subfolder)
-        if os.path.isdir(lora_name_or_path):
-            lora_name_or_path = os.path.join(lora_name_or_path, LORA_WEIGHT_NAME_SAFE)
+        # if os.path.isdir(lora_name_or_path):
+        #     lora_name_or_path = os.path.join(lora_name_or_path, LORA_WEIGHT_NAME_SAFE)
+        if os.path.exists(sub_lora_weights_name):
+            lora_name_or_path = os.path.join(lora_name_or_path, sub_lora_weights_name)
     else:
         lora_name_or_path = hf_hub_download(
             repo_id=lora_name_or_path,
-            filename=(
-                sub_lora_weights_name
-                if sub_lora_weights_name is not None
-                else LORA_WEIGHT_NAME_SAFE
-            ),
+            filename=(sub_lora_weights_name if sub_lora_weights_name is not None else LORA_WEIGHT_NAME_SAFE),
             subfolder=subfolder,
             **kwargs,
         )
-    assert lora_name_or_path.endswith(
-        ".safetensors"
-    ), "Currently only safetensors is supported"
+    assert lora_name_or_path.endswith(".safetensors"), "Currently only safetensors is supported"
     tensors = {}
     with safe_open(lora_name_or_path, framework="pt", device="cpu") as f:
         for key in f.keys():
@@ -48,9 +44,7 @@ def get_lora_weights(
     return tensors
 
 
-def merge_lora_weights(
-    tensors: torch.Tensor, key: str, prefix: str = "unet.unet."
-) -> Dict[str, torch.Tensor]:
+def merge_lora_weights(tensors: torch.Tensor, key: str, prefix: str = "unet.unet.") -> Dict[str, torch.Tensor]:
     """
     Args:
         tensors (torch.Tensor): state dict of lora weights
@@ -68,9 +62,7 @@ def merge_lora_weights(
     return out1, out2
 
 
-def merge_sd_lora_weights(
-    tensors: torch.Tensor, key: str, prefix: str = "unet.unet."
-) -> Dict[str, torch.Tensor]:
+def merge_sd_lora_weights(tensors: torch.Tensor, key: str, prefix: str = "unet.unet.") -> Dict[str, torch.Tensor]:
     """
     Args:
         tensors (torch.Tensor): state dict of lora weights
@@ -90,9 +82,7 @@ def merge_sd_lora_weights(
     return out1, out2
 
 
-def merge_community_flux_lora_weights(
-    tensors: torch.Tensor, key: str, prefix: str = "transformer.", layer_num: int = 0
-) -> Dict[str, torch.Tensor]:
+def merge_community_flux_lora_weights(tensors: torch.Tensor, key: str, prefix: str = "transformer.", layer_num: int = 0) -> Dict[str, torch.Tensor]:
     """
     Args:
         tensors (torch.Tensor): state dict of lora weights
@@ -160,12 +150,8 @@ def get_ratio_between_content_and_style(lora_weights_content, lora_weights_style
 
     comparison_results = []
 
-    layer_content_names = list(
-        filter(lambda name: "alpha" not in name, lora_weights_content.keys())
-    )
-    layer_style_names = list(
-        filter(lambda name: "alpha" not in name, lora_weights_style.keys())
-    )
+    layer_content_names = list(filter(lambda name: "alpha" not in name, lora_weights_content.keys()))
+    layer_style_names = list(filter(lambda name: "alpha" not in name, lora_weights_style.keys()))
 
     for i in range(0, len(layer_content_names), 2):
         layer_content_name_up = layer_content_names[i + 1]
@@ -201,23 +187,15 @@ def get_ratio_between_content_and_style(lora_weights_content, lora_weights_style
         raise ValueError("No layers found in content or style.")
     comparison_results = [result for result in comparison_results if result < 3 * average_ratio]
 
-    average_ratio = (
-        sum(comparison_results) / len(comparison_results)
-        if len(comparison_results) > 0
-        else float("inf")
-    )
+    average_ratio = sum(comparison_results) / len(comparison_results) if len(comparison_results) > 0 else float("inf")
     return average_ratio
 
 
-def insert_sd_klora_to_unet(
-    unet, lora_weights_content_path, lora_weights_style_path, alpha, beta, sum_timesteps, pattern
-):
+def insert_sd_klora_to_unet(unet, lora_weights_content_path, lora_weights_style_path, alpha, beta, sum_timesteps, pattern):
     lora_weights_content = get_lora_weights(lora_weights_content_path)
     lora_weights_style = get_lora_weights(lora_weights_style_path)
 
-    average_ratio = get_ratio_between_content_and_style(
-        lora_weights_content, lora_weights_style
-    )
+    average_ratio = get_ratio_between_content_and_style(lora_weights_content, lora_weights_style)
 
     for attn_processor_name, attn_processor in unet.attn_processors.items():
         # Parse the attention module.
@@ -225,12 +203,8 @@ def insert_sd_klora_to_unet(
         for n in attn_processor_name.split(".")[:-1]:
             attn_module = getattr(attn_module, n)
         attn_name = ".".join(attn_processor_name.split(".")[:-1])
-        merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = merge_lora_weights(
-            lora_weights_content, attn_name
-        )
-        merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = merge_lora_weights(
-            lora_weights_style, attn_name
-        )
+        merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = merge_lora_weights(lora_weights_content, attn_name)
+        merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = merge_lora_weights(lora_weights_style, attn_name)
         kwargs = {
             "alpha": alpha,
             "beta": beta,
@@ -278,15 +252,11 @@ def insert_sd_klora_to_unet(
     return unet
 
 
-def insert_community_sd_lora_to_unet(
-    unet, lora_weights_content_path, lora_weights_style_path, alpha, beta, sum_timesteps
-):
+def insert_community_sd_lora_to_unet(unet, lora_weights_content_path, lora_weights_style_path, alpha, beta, sum_timesteps):
     lora_weights_content = get_lora_weights(lora_weights_content_path)
     lora_weights_style = get_lora_weights(lora_weights_style_path)
 
-    average_ratio = get_ratio_between_content_and_style(
-        lora_weights_content, lora_weights_style
-    )
+    average_ratio = get_ratio_between_content_and_style(lora_weights_content, lora_weights_style)
     lora_weights_content = rename_safetensors_layer_name(lora_weights_content)
     lora_weights_style = rename_safetensors_layer_name(lora_weights_style)
 
@@ -296,12 +266,8 @@ def insert_community_sd_lora_to_unet(
         for n in attn_processor_name.split(".")[:-1]:
             attn_module = getattr(attn_module, n)
         attn_name = ".".join(attn_processor_name.split(".")[:-1])
-        merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = (
-            merge_sd_lora_weights(lora_weights_content, attn_name)
-        )
-        merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = (
-            merge_sd_lora_weights(lora_weights_style, attn_name)
-        )
+        merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = merge_sd_lora_weights(lora_weights_content, attn_name)
+        merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = merge_sd_lora_weights(lora_weights_style, attn_name)
         kwargs = {
             "alpha": alpha,
             "beta": beta,
@@ -360,30 +326,11 @@ def copy_and_assign_klora_weights(
     average_ratio,
     patten,
 ):
-    original_modules = {
-        sub_module_name: (
-            getattr(attn_module, sub_module_name)
-            if not isinstance(attn_module, nn.Linear)
-            else attn_module
-        )
-        for sub_module_name in sub_module_names
-    }
-    lora_weights_A = {
-        name: lora_weights_content[prefix + name + ".lora_A.weight"]
-        for name in sub_module_names
-    }
-    lora_weights_B = {
-        name: lora_weights_content[prefix + name + ".lora_B.weight"]
-        for name in sub_module_names
-    }
-    lora_weights_style_A = {
-        name: lora_weights_style[prefix + name + ".lora_A.weight"]
-        for name in sub_module_names
-    }
-    lora_weights_style_B = {
-        name: lora_weights_style[prefix + name + ".lora_B.weight"]
-        for name in sub_module_names
-    }
+    original_modules = {sub_module_name: (getattr(attn_module, sub_module_name) if not isinstance(attn_module, nn.Linear) else attn_module) for sub_module_name in sub_module_names}
+    lora_weights_A = {name: lora_weights_content[prefix + name + ".lora_A.weight"] for name in sub_module_names}
+    lora_weights_B = {name: lora_weights_content[prefix + name + ".lora_B.weight"] for name in sub_module_names}
+    lora_weights_style_A = {name: lora_weights_style[prefix + name + ".lora_A.weight"] for name in sub_module_names}
+    lora_weights_style_B = {name: lora_weights_style[prefix + name + ".lora_B.weight"] for name in sub_module_names}
 
     for sub_module_name in sub_module_names:
         original_module = original_modules[sub_module_name]
@@ -436,9 +383,7 @@ def insert_community_flux_lora_to_unet(
         lora_name_or_path=lora_weights_style_path,
         sub_lora_weights_name=style_lora_weight_name,
     )
-    average_ratio = get_ratio_between_content_and_style(
-        lora_weights_content, lora_weights_style
-    )
+    average_ratio = get_ratio_between_content_and_style(lora_weights_content, lora_weights_style)
     content_layer_nums = len(lora_weights_content) // 2
     style_layer_nums = len(lora_weights_style) // 2
     sum_timesteps = diffuse_step * content_layer_nums
@@ -453,19 +398,15 @@ def insert_community_flux_lora_to_unet(
             for n in attn_processor_name.split(".")[:-1]:
                 attn_module = getattr(attn_module, n)
             attn_name = ".".join(attn_processor_name.split(".")[:-1])
-            merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = (
-                merge_community_flux_lora_weights(
-                    tensors=lora_weights_content,
-                    key=attn_name,
-                    layer_num=content_layer_nums,
-                )
+            merged_lora_weights_dict_1_a, merged_lora_weights_dict_1_b = merge_community_flux_lora_weights(
+                tensors=lora_weights_content,
+                key=attn_name,
+                layer_num=content_layer_nums,
             )
-            merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = (
-                merge_community_flux_lora_weights(
-                    tensors=lora_weights_style,
-                    key=attn_name,
-                    layer_num=style_layer_nums,
-                )
+            merged_lora_weights_dict_2_a, merged_lora_weights_dict_2_b = merge_community_flux_lora_weights(
+                tensors=lora_weights_style,
+                key=attn_name,
+                layer_num=style_layer_nums,
             )
             kwargs = {
                 "alpha": alpha,
@@ -585,7 +526,7 @@ def insert_community_flux_lora_to_unet(
             copy_and_assign_klora_weights(
                 prefix=prefix + "attn.",
                 attn_module=temp_layer,
-                sub_module_names=[  
+                sub_module_names=[
                     "add_k_proj",
                     "add_q_proj",
                     "add_v_proj",
@@ -665,7 +606,7 @@ def insert_community_flux_lora_to_unet(
                         sub_module_names=[""],
                         lora_weights_content=lora_weights_content,
                         lora_weights_style=lora_weights_style,
-                        alpha=alpha,  
+                        alpha=alpha,
                         beta=beta,
                         sumtimesteps=sum_timesteps,
                         average_ratio=average_ratio,
@@ -696,7 +637,7 @@ def insert_community_flux_lora_to_unet(
                         alpha=alpha,
                         beta=beta,
                         sumtimesteps=sum_timesteps,
-                        average_ratio=average_ratio, 
+                        average_ratio=average_ratio,
                         patten=patten,
                     )
 
