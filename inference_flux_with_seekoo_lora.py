@@ -11,8 +11,10 @@ record_content_loras = [
     "/mnt/nfs/file_server2/public/taoyunkang/K-LoRA",
 ]
 content_triggers = [
-    "lip, Chubby, curly-haired kid, green cap, yellow hoodie, blue shorts, and yellow kicks.",
-    "Anna, Bright pink hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
+    # "lip, Chubby, curly-haired kid, green cap, yellow hoodie, blue shorts, and yellow kicks.",
+    "lip, Chubby, curly-haired kid, cap, hoodie, shorts, and kicks.",
+    # "Anna, Bright pink hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
+    "Anna, Bright hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
     "Richy, Casual, laid-back streetwear with elements of skate culture, featuring a beanie, suspenders, and a relaxed, casual attire.",
 ]
 content_lora_weight_names = [
@@ -34,6 +36,7 @@ record_style_loras = [
 style_triggers = [
     "The art style is 3D rendering with cartoonish features and plain white backgrounds.",
     "Black and white cartoon line art with plain backgrounds.",
+    # "Black and white cartoon line art with plain backgrounds. Thick, clean black lines, minimal details, and a monochromatic black-and-white color scheme, emphasizing simplicity and clarity.",
     "The art style is realistic monochrome photography with plain backgrounds and detailed textures.",
     "Intricate black and white crosshatching drawings, showcasing realistic detail and texture.",
     "Dynamic sports poster style with vibrant colors, bold typography, and a cinematic composition.",
@@ -44,14 +47,14 @@ style_triggers = [
 ]
 style_lora_weight_names = [
     "seekoo_lora/style_lora/3dCharacters_FLUXIPH_v0/3dCharacters_FLUXIPH_v0_diffusers.safetensors",
-    "seekoo_lora/style_lora/boldEAsy1-3_FLUXIPH_v0/boldEAsy1-3_FLUXIPH_v0-step00000500.safetensors",
-    "seekoo_lora/style_lora/bwPhoto_FLUXIPH_v1/bwPhoto_FLUXIPH_v1-step00000500.safetensors",
-    "seekoo_lora/style_lora/crossHatch_FLUXIPH_v1/crossHatch_FLUXIPH_v1.safetensors",
-    "seekoo_lora/style_lora/dynamic_sports_poster/auto-train-flux_999999_1745233996658___43.safetensors",
-    "seekoo_lora/style_lora/inkySketch_FLUXIPH_v0/inkySketch_FLUXIPH_v0.safetensors",
-    "seekoo_lora/style_lora/linkedIn_FLUXIPH_v1/linkedIn_FLUXIPH_v1.safetensors",
-    "seekoo_lora/style_lora/silhouette_FLUXIPH_v0/silhouette_FLUXIPH_v0.safetensors",
-    "seekoo_lora/style_lora/Vintage_photography/auto-train-flux_999999_1744992577984___43.safetensors",
+    "seekoo_lora/style_lora/boldEAsy1-3_FLUXIPH_v0/boldEAsy1-3_FLUXIPH_v0-step00000500_diffusers.safetensors",
+    "seekoo_lora/style_lora/bwPhoto_FLUXIPH_v1/bwPhoto_FLUXIPH_v1-step00000500_diffusers.safetensors",
+    "seekoo_lora/style_lora/crossHatch_FLUXIPH_v1/crossHatch_FLUXIPH_v1_diffusers.safetensors",
+    "seekoo_lora/style_lora/dynamic_sports_poster/auto-train-flux_999999_1745233996658___43_diffusers.safetensors",
+    "seekoo_lora/style_lora/inkySketch_FLUXIPH_v0/inkySketch_FLUXIPH_v0_diffusers.safetensors",
+    "seekoo_lora/style_lora/linkedIn_FLUXIPH_v1/linkedIn_FLUXIPH_v1_diffusers.safetensors",
+    "seekoo_lora/style_lora/silhouette_FLUXIPH_v0/silhouette_FLUXIPH_v0_diffusers.safetensors",
+    "seekoo_lora/style_lora/Vintage_photography/auto-train-flux_999999_1744992577984___43_diffusers.safetensors",
 ]
 
 

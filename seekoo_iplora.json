@@ -1,0 +1,104 @@
+{
+    "character": [
+        {
+            "id": "lip",
+            "base": "lip, Chubby, curly-haired kid, green cap, yellow hoodie, blue shorts, and yellow kicks.",
+            "wo_color": "lip, Chubby, curly-haired kid, cap, hoodie, shorts, and kicks.",
+            "lora_path": "seekoo_lora/character_lora/lipboy-step00000500-diffusers.safetensors"
+        },
+        {
+            "id": "Anna",
+            "base": "Anna, Bright pink hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
+            "wo_color": "Anna, Bright hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
+            "lora_path": "seekoo_lora/character_lora/traincharacter_anna_diffusers.safetensors"
+        },
+        {
+            "id": "Richy",
+            "base": "Richy, Casual, laid-back streetwear with elements of skate culture, featuring a beanie, suspenders, and a relaxed, casual attire.",
+            "wo_color": "Anna, Bright hair and matching lipstick, characterised by a sleek bob style and off-shoulder tops.",
+            "lora_path": "seekoo_lora/character_lora/traincharacter_richy_diffusers.safetensors"
+        }
+    ],
+    "styles": [
+        {
+            "id": "3d_character",
+            "desc": "The art style is 3D rendering with cartoonish features and plain white backgrounds. ",
+            "more_info": "Smooth, glossy textures, exaggerated proportions, vibrant colors, realistic lighting effects, and a blend of cartoonish and semi-realistic details.",
+            "keepColor": true,
+            "lora_path": "seekoo_lora/style_lora/3dCharacters_FLUXIPH_v0/3dCharacters_FLUXIPH_v0_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/3dCharacters_FLUXIPH_v0/3dCharacters_FLUXIPH_v0_embeddings.safetensors"
+        },
+        {
+            "id": "bold_easy",
+            "desc": "Black and white cartoon line art with plain backgrounds.",
+            "more_info": "Thick, clean black lines, minimal details, and a monochromatic black-and-white color scheme, emphasizing simplicity and clarity.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/boldEAsy1-3_FLUXIPH_v0/boldEAsy1-3_FLUXIPH_v0-step00000500_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/boldEAsy1-3_FLUXIPH_v0/boldEAsy1-3_FLUXIPH_v0_embeddings.safetensors"
+        },
+        {
+            "id": "BW_photo",
+            "desc": "The art style is realistic monochrome photography with plain backgrounds and detailed textures.",
+            "more_info": "High contrast, rich tonal gradients, fine texture details, dramatic lighting, and an emphasis on emotion and timeless aesthetics.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/bwPhoto_FLUXIPH_v1/bwPhoto_FLUXIPH_v1-step00000500_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/bwPhoto_FLUXIPH_v1/bwPhoto_FLUXIPH_v1_embeddings.safetensors"
+        },
+        {
+            "id": "Crosshatch",
+            "desc": "Intricate black and white crosshatching drawings, showcasing realistic detail and texture.",
+            "more_info": "Intricate linework, overlapping strokes, fine texture details, high contrast, and a hand-drawn, engraving-like aesthetic.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/crossHatch_FLUXIPH_v1/crossHatch_FLUXIPH_v1_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/crossHatch_FLUXIPH_v1/crossHatch_FLUXIPH_v1_embeddings.safetensors"
+        },
+        {
+            "id": "dynamic_sports_poster",
+            "desc": "Dynamic sports poster style with vibrant colors, bold typography, and a cinematic composition.",
+            "more_info": "Vivid colors, energetic compositions, dramatic lighting, action-packed scenes, bold typography, and a focus on movement and excitement.",
+            "keepColor": true,
+            "lora_path": "seekoo_lora/style_lora/dynamic_sports_poster/auto-train-flux_999999_1745233996658___43_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/dynamic_sports_poster/auto-train-flux_999999_1745233996658___43_embdding.safetensors"
+        },
+        {
+            "id": "InkySketch",
+            "desc": "The art style is cartoon with soft watercolor textures and minimalistic features, often showcasing plain or simple backgrounds.",
+            "more_info": "Playful linework, vibrant watercolor-like fills, soft textures, organic shapes, and a whimsical, hand-drawn aesthetic.",
+            "keepColor": true,
+            "lora_path": "seekoo_lora/style_lora/inkySketch_FLUXIPH_v0/inkySketch_FLUXIPH_v0_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/inkySketch_FLUXIPH_v0/inkySketch_FLUXIPH_v0_embeddings.safetensors"
+        },
+        {
+            "id": "LinkedIn",
+            "desc": "The style is realistic with neutral backgrounds to emphasize the textures and details.",
+            "more_info": "Professional composition, soft lighting, clean backgrounds, natural yet polished appearances, and a formal, approachable aesthetic.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/linkedIn_FLUXIPH_v1/linkedIn_FLUXIPH_v1_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/linkedIn_FLUXIPH_v1/linkedIn_FLUXIPH_v1_embeddings.safetensors"
+        },
+        {
+            "id": "silhouette",
+            "desc": "Silhouette photography with dramatic lighting and strong contrast.",
+            "more_info": "Dark, featureless shapes against a bright background, strong contrast, minimal detail, and a focus on form and outline to convey emotion and composition.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/silhouette_FLUXIPH_v0/silhouette_FLUXIPH_v0_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/silhouette_FLUXIPH_v0/silhouette_FLUXIPH_v0_embeddings.safetensors"
+        },
+        {
+            "id": "vintage_photo",
+            "desc": "Vintage photography style, sepia tones, and classic poses with a historical aesthetic.",
+            "more_info": "Sepia or muted tones, soft focus, grainy textures, retro compositions, and a nostalgic, timeless aesthetic.",
+            "keepColor": false,
+            "lora_path": "seekoo_lora/style_lora/Vintage_photography/auto-train-flux_999999_1744992577984___43_diffusers.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/Vintage_photography/auto-train-flux_999999_1744992577984___43_embding.safetensors"
+        },
+        {
+            "id": "greenTint",
+            "desc": "Cinematic, dark and moody, with stylized lighting and distinct color grading.",
+            "more_info": "High contrast, and an atmospheric, dramatic tone that evokes tension or mystery.",
+            "keepColor": true,
+            "lora_path": "seekoo_lora/style_lora/greenTint/greenTint_FLUXIPH_v0-step00000500.safetensors",
+            "embedding_path": "seekoo_lora/style_lora/greenTint/greenTint_FLUXIPH_v0_embeddings.safetensors"
+        }
+    ]
+}

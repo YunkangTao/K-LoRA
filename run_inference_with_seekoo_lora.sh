@@ -1,1 +1,1 @@
-python inference_flux_with_seekoo_lora.py --output_folder ./output_lipboy_3dcharacter --content_index 0 --style_index 0 
+CUDA_VISIBLE_DEVICES=2 python inference_flux_with_seekoo_lora.py --output_folder ./output_anna_boldeasy_refined_prompt --content_index 1 --style_index 1
